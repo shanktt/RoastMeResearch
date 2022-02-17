@@ -46,5 +46,5 @@ for url in image_links:
         print(e)
     i += 1
 
-print("test")
+print("Completed downloading images")
 df.to_csv("/Users/ashanktomar/Documents/comm_research/RoastMe/RoastMeAppended_Posts.csv")
