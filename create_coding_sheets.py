@@ -9,7 +9,7 @@ posts = pd.read_csv("final_posts.csv")
 bios = pd.read_csv("all_bios.csv")
 
 # only keep relevant columns from each df
-posts = posts[['Index', 'title', 'id', 'created_utc']]
+posts = posts[['Index', 'title', 'id', 'created_utc', 'author']]
 bios = bios[['body', 'link_id']]
 
 # Remove any posts missing values
@@ -43,7 +43,10 @@ merged = pd.merge(posts, bios, left_on='link_id_posts', right_on='link_id_bios',
 merged = merged.drop(["link_id_posts", "link_id_bios"], axis=1)
 
 # rename column for readability
-merged = merged.rename(columns={"index_posts": "post_index", "title_posts": "post_title", "body_bios": "bios", "created_utc_posts": "created_utc"})
+merged = merged.rename(columns={"index_posts": "post_index", "title_posts": "post_title", "body_bios": "bios", "created_utc_posts": "created_utc", "author_posts": "post_author"})
+
+# reorder columns
+merged = merged[['post_index', 'post_author', 'post_title', 'created_utc', 'bios']]
 
 # Add none to posts without bios
 merged['bios'] = merged['bios'].fillna("No bio")
